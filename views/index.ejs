@@ -79,14 +79,14 @@
 
     <h2>Add</h2>
 
-    <form action="/ques" method="POST">
+    <form id="quesForm" action="/ques" method="POST">
       <p>
           <label style="font-weight:500">Question: </label> <br />
           <textarea id="newQues" name="question" style="width:600px;height:75px;padding:3px;border:solid 1px #333"></textarea>
       </p>
       <p>
           <label style="font-weight:500">Answer:</label> <br />
-          <textarea id="newAns" name="answer" style="width:600px;height:300px;padding:5px;border:solid 1px #333"></textarea>
+          <textarea id="newAns" name="answer" style="width:600px;height:150px;padding:5px;border:solid 1px #333"></textarea>
        <p>
       <p>
           <label style="font-weight:500">Keywords: </label> <br />
@@ -94,7 +94,7 @@
         <p>
 
       <p>
-          <button type="submit">Add</button>
+          <button id="updateBtn" type="submit">Add</button>
       </p>
     </form>
 

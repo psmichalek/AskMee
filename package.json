@@ -4,6 +4,7 @@
   "description": "Ask tell",
   "main": "",
   "scripts": {
+    "start":"nodemon server.js",
     "test": "mocha"
   },
   "author": "Paul Samuel Michalek <psmichalek@gmail.com>",
