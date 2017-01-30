@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AskMee</title>
+  <style>
+      body{
+        font-size: 1.2em;
+        line-height: 1.4;
+        font-family: ff-dagny-web-pro,Dagny Pro,Hevetica Neue,Heveltica,Arial,sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #313131;
+        text-rendering: optimizeLegibility;
+        font-variant-ligatures: common-ligatures;
+      }
+      input, textarea, button { font-size:1.15em; }
+      .qcon{
+          padding:1px;
+      }
+      .ques{
+          font-size:1.15em;
+          color:#333;
+          background-color:#ddd;
+      }
+      .ques:hover{
+          cursor:pointer;
+          color:orange;
+      }
+      .acon{
+          padding:10px;
+          font-size:1.15em;
+          color:#eee;
+          background-color:#333;
+          border:dashed 1px orange;
+          display:none;
+      }
+      .u_btn{
+          font-size:0.5em;
+          margin-left:3px;
+      }
+      .u_btn:hover{
+          cursor:pointer;
+          color:blue;
+      }
+  </style>
+  <script src="main.js"></script>
+</head>
+<body>
+
+<h1>AskMee!</h1>
+
+<div style="float:left;border:solid 1px #ccc;width:49%;padding:7px;">
+
+    <h2>Questions</h2>
+
+      <% for(var i=0; i<ques.length; i++) {%>
+        <div class="qcon">
+
+            <div>
+                <span class="ques" onclick="toggle('a_<%=i%>')">
+                    <%= ques[i].question %>
+                </span>
+                <span class="u_btn" onclick="update('<%= ques[i]._id %>')">
+                    update
+                </span>
+            </div>
+
+            <div id="a_<%= i %>" class="acon">
+                <%= ques[i].answer %>
+            </div>
+
+        </div>
+      <% } %>
+
+</div>
+
+<div style="float:right;border:solid 1px #ccc;width:48%;padding:7px;">
+
+    <h2>Add</h2>
+
+    <form action="/ques" method="POST">
+      <p>
+          <label style="font-weight:500">Question: </label> <br />
+          <textarea id="newQues" name="question" style="width:600px;height:75px;padding:3px;border:solid 1px #333"></textarea>
+      </p>
+      <p>
+          <label style="font-weight:500">Answer:</label> <br />
+          <textarea id="newAns" name="answer" style="width:600px;height:300px;padding:5px;border:solid 1px #333"></textarea>
+       <p>
+      <p>
+          <label style="font-weight:500">Keywords: </label> <br />
+          <input id="newKeywords" type="text" name="keywords" style="width:300px;padding:3px;border:solid 1px #333">
+        <p>
+
+      <p>
+          <button type="submit">Add</button>
+      </p>
+    </form>
+
+</div>
+
+
+<div style="clear:both"></div>
+
+</body>
+</html>
