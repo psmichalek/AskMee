@@ -20,7 +20,6 @@ textarea{
     padding:3px;
     border:solid 1px #333;
     border-radius: 5px;
-    font-size:0.85em;
     background-color: #ccc;
 }
 
@@ -29,15 +28,6 @@ input{
     padding:3px;
     border:solid 1px #333;
     border-radius: 5px;
-    font-size:0.85em;
-    background-color: #ccc;
-}
-
-select{
-    padding:3px;
-    border:solid 1px #333;
-    border-radius: 5px;
-    font-size:0.75em;
     background-color: #ccc;
 }
 
@@ -48,7 +38,22 @@ label{
 }
 
 button{
+    border-radius:3px;
+}
+
+.form-grp{
+    position:relative;
     font-size:0.85em;
+    margin-bottom:10px;
+}
+
+.keyword-selector{
+    min-width:75;
+    padding:5px;
+    border:solid 1px #333;
+    border-radius: 5px;
+    font-size:0.85em;
+    background-color: #ccc;
 }
 
 /**
@@ -58,6 +63,7 @@ button{
 .header{
     height:70px;
     position:relative;
+    margin-bottom:15px;
 }
 
 .logo{
@@ -77,39 +83,83 @@ button{
     font-weight:600;
 }
 
-.nav{
-    height:30px;
-    position:relative;
-    margin-left:10px;
-}
-
-.keywords{
-    margin:0;
-    position:absolute;
-    top:50%;
-    transform:translate(0,-50%);
-    color: #333;
-}
-
 /**
  * Layout left/right cols
  */
 
-.leftside{
-    float:left;
-    border:solid 1px #cc9966;
-    border-radius:5px;
+.sto{
     width:47%;
-    position:relative;
     padding:10px;
+
+    border-bottom:solid 1px #cc9966;
+    border-top:solid 1px #cc9966;
+    border-right:solid 1px #cc9966;
+    border-left:solid 1px #cc9966;
+
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
-.rightside{
+.sto-left{
+    float:left;
+}
+
+.sto-right{
     float:right;
-    border:solid 1px #cc9966;
-    border-radius:5px;
+}
+
+.sto-cap{
+    height:25px;
+    position:relative;
+    padding:0;
+}
+
+.cap{
+    position:absolute;
+    height:100%;
     width:47%;
-    padding:10px;
+    padding-right:10px;
+    padding-left:10px;
+
+    background-color:#86592d;
+
+    border-top:solid 1px #cc9966;
+    border-bottom:none;
+    border-right:solid 1px #cc9966;
+    border-left:solid 1px #cc9966;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.cap-left{
+    margin:0;
+    left:0;
+    transform:translate(0,0);
+}
+
+.cap-right{
+    margin:0;
+    left:100%;
+    transform:translate(-100%,0);
+}
+
+/**
+ * Filters
+ */
+
+.filter-label {
+    display:inline-block;
+}
+
+.filter-item{
+    display:inline-block;
+    border-radius:3px;
+    background-color: #ccc;
 }
 
 /**

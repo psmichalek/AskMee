@@ -14,17 +14,28 @@
     <span class="page-title">AskMee!</span>
 </div>
 
-<div class="nav">
-    <select name="keywords" class="keywords" onchange="filter(this)">
-        <option value=""></option>
-        <option value="all">All Keywords</option>
-        <% keywords.forEach(function(keyword){%>
-            <option><%= keyword %></option>
-        <% }) %>
-    </select>
+<div class="sto-cap">
+    <div class="cap cap-left">
+        <div class="filter-grp">
+            <select name="keywords" class="filter-item" onchange="filter(this)">
+                <option value=""> keyword filter </option>
+                <option value="all">All Keywords</option>
+                <% keywords.forEach(function(keyword){%>
+                    <option><%= keyword %></option>
+                <% }) %>
+            </select>
+        </div>
+    </div>
+
+    <div class="cap cap-right">
+        <div class="cap-grp">
+            New Meat
+        </div>
+    </div>
 </div>
 
-<div class="leftside">
+<div class="sto sto-left">
+
      <% dataset.forEach(function(o,i){%>
         <div class="quesion-list">
 
@@ -45,7 +56,7 @@
       <% }) %>
 </div>
 
-<div class="rightside">
+<div class="sto sto-right">
 
     <form id="quesForm" action="/ques" method="POST">
 
@@ -54,19 +65,25 @@
             <span id="updatee"></span>
         </div>
 
-      <div>
+      <div class="form-grp">
           <label>Question: </label>
           <textarea id="newQues" name="question"></textarea>
       </div>
 
-      <div>
+      <div class="form-grp">
           <label>Answer:</label>
           <textarea id="newAns" name="answer"></textarea>
-       <div>
+      </div>
 
-      <div>
+      <div class="form-grp">
           <label>Keywords: </label>
           <input id="newKeywords" type="text" name="keywords">
+          <select class="keyword-selector" onchange="addkeyword(this)">
+              <option value=""></option>
+              <% keywords.forEach(function(keyword){%>
+                  <option><%= keyword %></option>
+              <% }) %>
+          </select>
       </div>
 
       <div class="btn-grp">
