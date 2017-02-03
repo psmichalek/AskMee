@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Ask tell",
   "engines": {
-    "node": "5.5.0",
+    "node": "6.9.5",
     "npm": "3.5.3"
   },
   "main": "index.js",
