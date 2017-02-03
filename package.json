@@ -8,7 +8,7 @@
     "url": "git+https://github.com/psmichalek/AskeMee.git"
   },
   "scripts": {
-    "start": "npm run serve:dev",
+    "start": "node app/server.js",
     "serve:dev": "nodemon app/server.js",
     "test": "mocha --report spec app/*.test.js",
     "deploy": "git push heroku master"
