@@ -17,7 +17,7 @@
     "test": "mocha --report spec test/**/*.test.js",
     "deploy": "git push heroku master",
     "prod": "heroku open",
-    "prod:log": "heroku logs --source app"
+    "wlog": "heroku logs --source app"
   },
   "author": "Paul Samuel Michalek <psmichalek@gmail.com>",
   "license": "MIT",
