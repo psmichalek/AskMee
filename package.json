@@ -6,32 +6,17 @@
     "node": "5.5.0",
     "npm": "3.5.3"
   },
-  "main": "app/server.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/psmichalek/AskeMee.git"
-  },
   "scripts": {
-    "start": "node app/server.js",
-    "serve:dev": "nodemon app/server.js",
     "test": "mocha --report spec app/*.test.js",
-    "deploy": "git push heroku master",
-    "prod": "heroku open",
-    "prod:log": "heroku logs --source app"
+    "start": "node app/server.js"
   },
-  "author": "Paul Samuel Michalek <psmichalek@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0",
-    "nodemon": "^1.11.0"
-  },
   "dependencies": {
-    "body-parser": "^1.16.0",
-    "ejs": "^2.5.5",
-    "express": "^4.14.1",
-    "mongodb": "^2.2.22",
-    "path": "^0.12.7",
-    "shortid": "^2.2.6"
+    "body-parser": "1.16.0",
+    "ejs": "2.5.5",
+    "express": "4.14.1",
+    "mongodb": "2.2.22",
+    "path": "0.12.7",
+    "shortid": "2.2.6"
   }
 }
