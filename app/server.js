@@ -14,69 +14,70 @@ const collectionName = 'askmee'
 const vw_index = 'index.ejs'
 var db
 
-MongoClient.connect(dburl, (err,database) => {
-    if(err) return console.log(err,MONGO_PW)
-    db = database
-    app.listen(HOST_PORT, () => {
-      console.log('listening on '+HOST_PORT)
-    })
-})
-
-app.use(bodyParser.urlencoded({extended: true}))
-
-app.use(express.static(path.join(__dirname,'public')))
-
-app.set('view engine','ejs')
-
-app.get('/', (req,res) => {
-    db.collection(collectionName).find().toArray( (err,result) => {
-        if(err) return console.log(err)
-        res.render(path.join(__dirname,vw_index),{ques:result,dirr:__dirname})
-    })
-})
-
-app.get('/list',(req,res) => {
-    db.collection(collectionName).find().toArray( (err,result) => {
-        if(err) return console.log(err)
-        res.json(result)
-    })
-})
-
-app.get('/ques/:id', (req,res) => {
-    db.collection(collectionName)
-    .findOne({uid:req.params.id},(err,result) => {
-        if(err) return console.log(err)
-        res.json(result)
-    })
-})
-
-app.post('/ques/:id?', (req,res) => {
-    console.log('id = '+req.params.id)
-    if(typeof req.params.id==='undefined'){
-        let doc = {}
-        doc.uid = shortid.generate()
-        doc.question = (req.body.question) ? req.body.question : ''
-        doc.answer = (req.body.answer) ? req.body.answer : ''
-        doc.keywords = (req.body.keywords) ? req.body.keywords : ''
-        console.log('new doc: ',doc)
-        db.collection(collectionName)
-        .insert(doc, (err,result) => {
-            if(err) return console.log(err)
-            console.log('question saved ',result)
-            res.redirect('/')
-        })
-    } else{
-        let doc = {}
-        if(req.body.question) doc.question = req.body.question
-        if(req.body.answer) doc.answer = req.body.answer
-        if(req.body.keywords) doc.keywords= req.body.keywords
-        console.log('update object ',doc)
-        db.collection(collectionName)
-        .findOneAndUpdate({uid:req.params.id},{$set:doc},{sort:{_id:-1},upsert:false},(err,result) => {
-            if(err) return console.log(err)
-            console.log('question updated ',result)
-            //res.json(result)
-            res.redirect('/')
-        })
-    }
-})
+app.get('/',function(q,r){ r.send('yup') })
+// MongoClient.connect(dburl, (err,database) => {
+//     if(err) return console.log(err,MONGO_PW)
+//     db = database
+//     app.listen(HOST_PORT, () => {
+//       console.log('listening on '+HOST_PORT)
+//     })
+// })
+//
+// app.use(bodyParser.urlencoded({extended: true}))
+//
+// app.use(express.static(path.join(__dirname,'public')))
+//
+// app.set('view engine','ejs')
+//
+// app.get('/', (req,res) => {
+//     db.collection(collectionName).find().toArray( (err,result) => {
+//         if(err) return console.log(err)
+//         res.render(path.join(__dirname,vw_index),{ques:result,dirr:__dirname})
+//     })
+// })
+//
+// app.get('/list',(req,res) => {
+//     db.collection(collectionName).find().toArray( (err,result) => {
+//         if(err) return console.log(err)
+//         res.json(result)
+//     })
+// })
+//
+// app.get('/ques/:id', (req,res) => {
+//     db.collection(collectionName)
+//     .findOne({uid:req.params.id},(err,result) => {
+//         if(err) return console.log(err)
+//         res.json(result)
+//     })
+// })
+//
+// app.post('/ques/:id?', (req,res) => {
+//     console.log('id = '+req.params.id)
+//     if(typeof req.params.id==='undefined'){
+//         let doc = {}
+//         doc.uid = shortid.generate()
+//         doc.question = (req.body.question) ? req.body.question : ''
+//         doc.answer = (req.body.answer) ? req.body.answer : ''
+//         doc.keywords = (req.body.keywords) ? req.body.keywords : ''
+//         console.log('new doc: ',doc)
+//         db.collection(collectionName)
+//         .insert(doc, (err,result) => {
+//             if(err) return console.log(err)
+//             console.log('question saved ',result)
+//             res.redirect('/')
+//         })
+//     } else{
+//         let doc = {}
+//         if(req.body.question) doc.question = req.body.question
+//         if(req.body.answer) doc.answer = req.body.answer
+//         if(req.body.keywords) doc.keywords= req.body.keywords
+//         console.log('update object ',doc)
+//         db.collection(collectionName)
+//         .findOneAndUpdate({uid:req.params.id},{$set:doc},{sort:{_id:-1},upsert:false},(err,result) => {
+//             if(err) return console.log(err)
+//             console.log('question updated ',result)
+//             //res.json(result)
+//             res.redirect('/')
+//         })
+//     }
+// })
