@@ -10,7 +10,7 @@
   "scripts": {
     "start": "npm run serve:dev",
     "serve:dev": "nodemon app/server.js",
-    "test": "mocha --reporter spec \"./*.test.js\"",
+    "test": "mocha --report spec app/*.test.js",
     "deploy":"git push heroku master"
   },
   "author": "Paul Samuel Michalek <psmichalek@gmail.com>",
