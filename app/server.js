@@ -12,7 +12,6 @@ const shortid = require('shortid')
 const app = express()
 const collectionName = 'askmee'
 const vw_index = 'index.ejs'
-
 var db
 
 MongoClient.connect(dburl, (err,database) => {
