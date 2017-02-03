@@ -74,6 +74,11 @@ button{
 #updateeFld{
     display:none;
 }
+
+#respErr{
+    display:none;
+}
+
 .btn-update{
     font-size:0.5em;
     margin-left:3px;
@@ -82,4 +87,17 @@ button{
 .btn-update:hover{
     cursor:pointer;
     color:blue;
+}
+
+.err{
+    font-size:0.95em;
+    color:red;
+}
+
+.err-mesg{
+    padding:5px;
+    font-style: italic;
+    display:inline-block;
+    background-color: #333;
+    color:orange;
 }
