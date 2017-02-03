@@ -1,0 +1,7 @@
+{
+    "name":"askmee",
+    "description":"Ask and tell",
+    "repository":"https://github.com/psmichalek/AskMee.git",
+    "keywords":["node","express","AskMee"],
+    "heroku_url":"https://tranquil-caverns-24632.herokuapp.com"
+}
