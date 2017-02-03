@@ -1,9 +1,21 @@
 
 function toggle(id) {
-    var q=document.getElementById(id);
-    console.log(q);
-    if(q.style.display!='block') q.style.display='block';
-    else q.style.display='none';
+    var ans = document.getElementById('a_'+id);
+    var ques = document.getElementById('q_'+id);
+
+    function _modQ(w,c,b,s){
+        ques.style.fontWeight = w;
+        ques.style.color = c;
+        ques.style.borderBottom = b;
+        ques.style.fontSize = s;
+    }
+    if(ans.style.display!='block') {
+        ans.style.display = 'block';
+        _modQ('bold','orange','none','0.95em');
+    }else {
+        ans.style.display = 'none';
+        _modQ('normal','','1px dotted #ccc','0.75em');
+    }
 }
 
 function update(id){
@@ -30,6 +42,19 @@ function update(id){
             })
         } else console.log('Error! ',resp.status)
     })
+}
+
+function filter(sel){
+    if(sel.value.trim()=='all'||sel.value.trim()==''){
+        window.location.assign('/');
+    } else{
+        console.log('filter on: '+sel.value)
+        var form = document.createElement('form');
+        form.method = 'post';
+        form.action = '/';
+        form.appendChild(sel)
+        form.submit();
+    }
 }
 
 function resetform(){

@@ -2,5 +2,6 @@
     "name":"askmee",
     "description":"Ask and tell",
     "repository":"https://github.com/psmichalek/AskMee.git",
-    "keywords":["node","express","AskMee"]
+    "keywords":["node","express","AskMee"],
+    "logo": "http://askmee.herokuapp.com/askmee.svg",
 }

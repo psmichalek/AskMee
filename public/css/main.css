@@ -1,60 +1,132 @@
 body{
   font-size: 0.95em;
-  line-height: 1.4;
+  line-height: 1;
   font-family: ff-dagny-web-pro,Dagny Pro,Hevetica Neue,Heveltica,Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #313131;
+  background-color:#000;
+  color: #ddd;
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures;
-}
+ }
+
+/**
+* Form Elements
+*/
 
 textarea{
     width:98%;
     height:75px;
     padding:3px;
     border:solid 1px #333;
+    border-radius: 5px;
     font-size:0.85em;
+    background-color: #ccc;
 }
 
 input{
     width:300;
     padding:3px;
     border:solid 1px #333;
+    border-radius: 5px;
     font-size:0.85em;
+    background-color: #ccc;
+}
+
+select{
+    padding:3px;
+    border:solid 1px #333;
+    border-radius: 5px;
+    font-size:0.75em;
+    background-color: #ccc;
 }
 
 label{
-    font-weight:600;
+    display:block;
+    margin-bottom:5px;
+    font-weight:500;
 }
 
 button{
     font-size:0.85em;
 }
 
+/**
+ * Page Header
+ */
+
+.header{
+    height:70px;
+    position:relative;
+}
+
+.logo{
+    margin:0;
+    position:absolute;
+    top:50%;
+    transform:translate(0,-50%);
+}
+
+.page-title{
+    margin:0;
+    position:absolute;
+    top:50%;
+    left:70px;
+    transform:translate(0,-50%);
+    font-size:1.2em;
+    font-weight:600;
+}
+
+.nav{
+    height:30px;
+    position:relative;
+    margin-left:10px;
+}
+
+.keywords{
+    margin:0;
+    position:absolute;
+    top:50%;
+    transform:translate(0,-50%);
+    color: #333;
+}
+
+/**
+ * Layout left/right cols
+ */
+
 .leftside{
     float:left;
-    border:solid 1px #ccc;
+    border:solid 1px #cc9966;
+    border-radius:5px;
     width:47%;
     position:relative;
-    padding:7px;
+    padding:10px;
 }
 
 .rightside{
     float:right;
-    border:solid 1px #ccc;
+    border:solid 1px #cc9966;
+    border-radius:5px;
     width:47%;
-    padding:7px;
+    padding:10px;
 }
+
+/**
+ * Questions
+ */
 
 .quesion-list{
+    max-height:300px;
     padding:1px;
+    overflow-y: auto;
 }
-
+.question-item-grp{
+    margin-bottom:10px;
+}
 .question-item{
-    font-size:0.85em;
-    color:#333;
-    background-color:#ddd;
+    border-bottom:1px dotted #ccc;
+    font-size:0.75em;
 }
 
 .question-item:hover{
@@ -62,14 +134,24 @@ button{
     color:orange;
 }
 
+/**
+ * Answers
+ */
+
 .answer-container{
-    padding:10px;
-    font-size:0.85em;
+    margin-top:10px;
+    margin-bottom:10px;
+    padding:15px;
+    font-size:0.75em;
     color:#eee;
     background-color:#333;
     border:dashed 1px orange;
     display:none;
 }
+
+/**
+ * Hidden Fields
+ */
 
 #updateeFld{
     display:none;
@@ -79,15 +161,27 @@ button{
     display:none;
 }
 
+/**
+ * Update button
+ */
+
+.btn-grp{
+    margin-top:10px;
+    margin-left:3px;
+}
 .btn-update{
     font-size:0.5em;
-    margin-left:3px;
 }
 
 .btn-update:hover{
     cursor:pointer;
-    color:blue;
+    color:orange;
+    font-style:underline;
 }
+
+/**
+ * Errors
+ */
 
 .err{
     font-size:0.95em;

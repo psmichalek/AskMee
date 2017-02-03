@@ -23,9 +23,9 @@ describe('Loading the Express server ', () => {
         .expect(200,done)
     })
 
-    it('should respond to /list ', (done) => {
+    it('should respond to /keywords ', (done) => {
         request(server)
-        .get('/list')
+        .get('/keywords')
         .set('Accept','application/json')
         .expect(200, noDbConnError, done)
     })

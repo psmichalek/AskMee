@@ -6,10 +6,10 @@ const express       = require('express')
 const bodyParser    = require('body-parser')
 const path          = require('path')
 const shortid       = require('shortid')
-
+const MONGO_UN      = (process.env.MICHALEK_APPLES_UN) ? process.env.MICHALEK_APPLES_UN : 'joejoe'
 const MONGO_PW      = (process.env.MICHALEK_APPLES_PW) ? process.env.MICHALEK_APPLES_PW : '12345'
 const HOST_PORT     = (process.env.PORT) ? process.env.PORT : 3007
-const DB_URL        = 'mongodb://rainbowdash:'+MONGO_PW+'@ds139969.mlab.com:39969/michalek-apples'
+const DB_URL        = 'mongodb://'+MONGO_UN+':'+MONGO_PW+'@ds139969.mlab.com:39969/michalek-apples'
 const COLLECTION    = 'askmee'
 const VW_INDEX      = 'views/index.ejs'
 const VW_ERROR      = 'views/error.ejs'
@@ -18,6 +18,33 @@ const app = express()
 var server = app.listen(HOST_PORT, () => { console.log('listening on '+HOST_PORT) })
 var db
 var noDbConnError = {'success':false,'error':'no database connection established'}
+
+function _getKeywords(result){
+    let keywords = []
+    let kws = result.map( (val) => { return val.keywords } )
+    if(kws.length>0){
+        let tmp = []
+        kws.forEach( (kv) => {
+            let words = kv.split(',')
+            words.map( (w) => { tmp.push(w) } )
+        })
+        keywords = tmp.filter( (val,pos) => { return tmp.indexOf(val.trim())==pos })
+    }
+    return keywords
+}
+
+function _getResponseDataObject(result,query){
+    let rows = (result) ? Array.from(result) : []
+    let ret = {}
+    ret.keywords = (result) ? _getKeywords(result) : []
+    if(typeof query!=='undefined' && typeof query.keywords!=='undefined'){
+        let regex = new RegExp(query.keywords)
+        ret.dataset = rows.filter( (o) => {
+            return regex.test(o.keywords)
+        })
+    } else ret.dataset = rows
+    return ret
+}
 
 MongoClient.connect(DB_URL, (err,database) => {
     if(err) return console.log('Error connecting to database. ',err)
@@ -32,18 +59,33 @@ app.set('view engine','ejs')
 
 app.get('/', (req,res) => {
     if(db){
+        let data = {}
         db.collection(COLLECTION).find().toArray( (err,result) => {
             if(err) return console.log(err)
-            res.render(path.join(__dirname,VW_INDEX),{ques:result})
+            res.render( path.join(__dirname,VW_INDEX), _getResponseDataObject(result) )
         })
     } else res.render(path.join(__dirname,VW_ERROR),{err:noDbConnError.error})
 })
 
-app.get('/list',(req,res) => {
+app.post('/', (req,res) => {
     if(db){
+        let query
+        if(typeof req.body.keywords!=='undefined'&&req.body.keywords!='') query={keywords:req.body.keywords}
+        console.log('query',query)
+        db.collection(COLLECTION)
+        .find().toArray( (err,result) => {
+            if(err) return console.log(err)
+            res.render(path.join(__dirname,VW_INDEX), _getResponseDataObject(result,query) )
+        })
+    } else res.json(noDbConnError)
+})
+
+app.get('/keywords',(req,res) => {
+    if(db){
+        let keywords = []
         db.collection(COLLECTION).find().toArray( (err,result) => {
             if(err) return console.log(err)
-            res.json(result)
+            res.json(_getKeywords(result))
         })
     } else res.json(noDbConnError)
 })
