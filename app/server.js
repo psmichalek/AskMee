@@ -14,7 +14,7 @@ const collectionName = 'askmee'
 const vw_index = 'index.ejs'
 var db
 
-app.get('/',function(q,r){ r.send('yup') })
+
 // MongoClient.connect(dburl, (err,database) => {
 //     if(err) return console.log(err,MONGO_PW)
 //     db = database
