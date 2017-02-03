@@ -6,16 +6,18 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/psmichalek/AskeMee.git"
-},
+  },
   "scripts": {
     "start": "npm run serve:dev",
     "serve:dev": "nodemon app/server.js",
     "test": "mocha --report spec app/*.test.js",
-    "deploy":"git push heroku master"
+    "deploy": "git push heroku master"
   },
   "author": "Paul Samuel Michalek <psmichalek@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
