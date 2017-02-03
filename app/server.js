@@ -1,19 +1,20 @@
-'use strict'
-
-const MONGO_PW = (process.env.MICHALEK_APPLES_PW) ? process.env.MICHALEK_APPLES_PW : '12345'
-const HOST_PORT = 3005
-const dburl = 'mongodb://rainbowdash:'+MONGO_PW+'@ds139969.mlab.com:39969/michalek-apples'
-const ObjectId = require('mongodb').ObjectId
-const MongoClient = require('mongodb').MongoClient
-const express = require('express')
-const bodyParser= require('body-parser')
-const path = require('path')
-const shortid = require('shortid')
-const app = express()
-const collectionName = 'askmee'
-const vw_index = 'index.ejs'
-var db
-
+console.log(1);
+// 'use strict'
+//
+// const MONGO_PW = (process.env.MICHALEK_APPLES_PW) ? process.env.MICHALEK_APPLES_PW : '12345'
+// const HOST_PORT = 3005
+// const dburl = 'mongodb://rainbowdash:'+MONGO_PW+'@ds139969.mlab.com:39969/michalek-apples'
+// const ObjectId = require('mongodb').ObjectId
+// const MongoClient = require('mongodb').MongoClient
+// const express = require('express')
+// const bodyParser= require('body-parser')
+// const path = require('path')
+// const shortid = require('shortid')
+// const app = express()
+// const collectionName = 'askmee'
+// const vw_index = 'index.ejs'
+// var db
+//
 
 // MongoClient.connect(dburl, (err,database) => {
 //     if(err) return console.log(err,MONGO_PW)
