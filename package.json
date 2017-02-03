@@ -2,6 +2,10 @@
   "name": "askmee",
   "version": "1.0.0",
   "description": "Ask tell",
+  "engines": {
+    "node": "5.5.0",
+    "npm": "3.5.3"
+  },
   "main": "app/server.js",
   "repository": {
     "type": "git",
@@ -11,7 +15,9 @@
     "start": "node app/server.js",
     "serve:dev": "nodemon app/server.js",
     "test": "mocha --report spec app/*.test.js",
-    "deploy": "git push heroku master"
+    "deploy": "git push heroku master",
+    "prod": "heroku open",
+    "prod:log": "heroku logs --source app"
   },
   "author": "Paul Samuel Michalek <psmichalek@gmail.com>",
   "license": "MIT",
@@ -25,6 +31,7 @@
     "ejs": "^2.5.5",
     "express": "^4.14.1",
     "mongodb": "^2.2.22",
+    "path": "^0.12.7",
     "shortid": "^2.2.6"
   }
 }
