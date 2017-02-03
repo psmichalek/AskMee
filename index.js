@@ -1,7 +1,7 @@
 'use strict'
 
 const MONGO_PW = (process.env.MICHALEK_APPLES_PW) ? process.env.MICHALEK_APPLES_PW : '12345'
-const HOST_PORT = 3005
+const HOST_PORT = (process.env.PORT) ? process.env.PORT : 3007
 const dburl = 'mongodb://rainbowdash:'+MONGO_PW+'@ds139969.mlab.com:39969/michalek-apples'
 const ObjectId = require('mongodb').ObjectId
 const MongoClient = require('mongodb').MongoClient
