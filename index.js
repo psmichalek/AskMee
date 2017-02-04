@@ -51,22 +51,22 @@ MongoClient.connect(DB_URL, (err,database) => {
     db = database
 })
 
-// app.use(bodyParser.urlencoded({extended: true}))
-//
-// app.use(express.static(path.join(__dirname,'public')))
-//
-// app.set('view engine','ejs')
-//
-// app.get('/', (req,res) => {
-//     if(db){
-//         let data = {}
-//         db.collection(COLLECTION).find().toArray( (err,result) => {
-//             if(err) return console.log(err)
-//             res.render( path.join(__dirname,VW_INDEX), _getResponseDataObject(result) )
-//         })
-//     } else res.render(path.join(__dirname,VW_ERROR),{err:noDbConnError.error})
-// })
-//
+app.use(bodyParser.urlencoded({extended: true}))
+
+app.use(express.static(path.join(__dirname,'public')))
+
+app.set('view engine','ejs')
+
+app.get('/', (req,res) => {
+    if(db){
+        let data = {}
+        db.collection(COLLECTION).find().toArray( (err,result) => {
+            if(err) return console.log(err)
+            res.render( path.join(__dirname,VW_INDEX), _getResponseDataObject(result) )
+        })
+    } else res.render(path.join(__dirname,VW_ERROR),{err:noDbConnError.error})
+})
+
 // app.post('/', (req,res) => {
 //     if(db){
 //         let query
