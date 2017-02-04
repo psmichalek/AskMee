@@ -1,4 +1,8 @@
 
+function ttt(){
+    var sel = document.getElementById('newKeywords_sel')
+    console.log(sel.value)
+}
 function toggle(id) {
     var ans = document.getElementById('a_'+id);
     var ques = document.getElementById('q_'+id);
@@ -27,7 +31,7 @@ function update(id){
                     console.log('success fetching ',o)
                     document.getElementById('newQues').value = o.question;
                     document.getElementById('newAns').value = o.answer;
-                    document.getElementById('newKeywords').value = o.keywords;
+                    document.getElementById('newKeywords_txt').value = o.keywords;
                     document.getElementById('updateBtn').innerHTML = 'Update';
                     document.getElementById("quesForm").action = "/ques/"+id;
                     document.getElementById("updatee").innerHTML = o.uid;

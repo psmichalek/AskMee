@@ -71,7 +71,7 @@ app.post('/', (req,res) => {
     if(db){
         let query
         if(typeof req.body.keywords!=='undefined'&&req.body.keywords!='') query={keywords:req.body.keywords}
-        console.log('query',query)
+        //console.log('query',query)
         db.collection(COLLECTION)
         .find().toArray( (err,result) => {
             if(err) return console.log(err)
@@ -108,19 +108,24 @@ app.post('/ques/:id?', (req,res) => {
             doc.uid = shortid.generate()
             doc.question = (req.body.question) ? req.body.question : ''
             doc.answer = (req.body.answer) ? req.body.answer : ''
-            doc.keywords = (req.body.keywords) ? req.body.keywords : ''
+            doc.keywords = ''
+
+            if(req.body.keywords_sel) doc.keywords = req.body.keywords_sel.join()
+            if(req.body.keywords_txt) doc.keywords = doc.keywords +','+ req.body.keywords_txt
+
             console.log('new doc: ',doc)
             db.collection(COLLECTION)
             .insert(doc, (err,result) => {
                 if(err) return console.log(err)
-                console.log('question saved ',result)
+                //console.log('question saved ',result)
                 res.redirect('/')
             })
         } else{
             let doc = {}
             if(req.body.question) doc.question = req.body.question
             if(req.body.answer) doc.answer = req.body.answer
-            if(req.body.keywords) doc.keywords= req.body.keywords
+            // if(req.body.keywords_sel && req.body.keywords_sel.length>0) doc.keywords = req.body.keywords_sel.join()
+            if(req.body.keywords_txt) doc.keywords = doc.keywords +','+ req.body.keywords_txt
             console.log('update object ',doc)
             db.collection(COLLECTION)
             .findOneAndUpdate({uid:req.params.id},{$set:doc},{sort:{_id:-1},upsert:false},(err,result) => {

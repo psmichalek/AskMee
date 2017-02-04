@@ -48,14 +48,16 @@ button{
 }
 
 .keyword-selector{
-    min-width:75;
+    min-width:125px;
     padding:5px;
     border:solid 1px #333;
     border-radius: 5px;
     font-size:0.85em;
     background-color: #ccc;
 }
-
+.keyword-text{
+    vertical-align: top;
+}
 /**
  * Page Header
  */

@@ -77,13 +77,16 @@
 
       <div class="form-grp">
           <label>Keywords: </label>
-          <input id="newKeywords" type="text" name="keywords">
-          <select class="keyword-selector" onchange="addkeyword(this)">
-              <option value=""></option>
+          <% if(typeof keywords!=='undefined' && keywords.length>0) {%>
+          <select id="newKeywords_sel" name="keywords_sel" class="keyword-selector" multiple=1 size="<%= keywords.length-1 %>">
               <% keywords.forEach(function(keyword){%>
+                  <% if(keyword!='') { %>
                   <option><%= keyword %></option>
+                   <% } %>
               <% }) %>
           </select>
+          <% } %>
+          <input id="newKeywords_txt" class="keyword-text" type="text" name="keywords_txt" />
       </div>
 
       <div class="btn-grp">
