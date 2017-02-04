@@ -53,9 +53,9 @@ MongoClient.connect(DB_URL, (err,database) => {
 
 app.use(bodyParser.urlencoded({extended: true}))
 
-app.use(express.static(path.join(__dirname,'public')))
+//app.use(express.static(path.join(__dirname,'public')))
 
-app.set('view engine','ejs')
+//app.set('view engine','ejs')
 
 // app.get('/', (req,res) => {
 //     if(db){
