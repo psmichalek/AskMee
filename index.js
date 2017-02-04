@@ -16,8 +16,15 @@ const VW_ERROR      = 'views/error.ejs'
 
 const app = express()
 var server = app.listen(HOST_PORT, () => { console.log('listening on '+HOST_PORT) })
+var io = require('socket.io')(server)
 var db
 var noDbConnError = {'success':false,'error':'no database connection established'}
+
+io.on('connect',(socket) => {
+    socket.on('message', () => {
+
+    })
+})
 
 function _getKeywords(result){
     let keywords = []
@@ -57,9 +64,35 @@ app.use(express.static(path.join(__dirname,'public')))
 
 app.set('view engine','ejs')
 
+/**
+ * API routes
+ */
+
+app.get('/api/questions', (req,res) => {
+    if(db){
+        db.collection(COLLECTION).find().toArray( (err,result) => {
+            if(err) return console.log(err)
+            res.json( _getResponseDataObject(result) )
+        })
+    } else res.json( {err:noDbConnError.error} )
+})
+
+app.get('/api/question/:id', (req,res) => {
+    if(db){
+        db.collection(COLLECTION)
+        .findOne({uid:req.params.id},(err,result) => {
+            if(err) return console.log(err)
+            res.json(result)
+        })
+    } else res.json(noDbConnError)
+})
+
+/**
+ * Static serve routes
+ */
+
 app.get('/', (req,res) => {
     if(db){
-        let data = {}
         db.collection(COLLECTION).find().toArray( (err,result) => {
             if(err) return console.log(err)
             res.render( path.join(__dirname,VW_INDEX), _getResponseDataObject(result) )
