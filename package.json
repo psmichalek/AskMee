@@ -23,7 +23,6 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
-    "debug": "^2.6.0",
     "jsdom": "^9.9.1",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
@@ -35,6 +34,7 @@
     "express": "^4.14.1",
     "mongodb": "^2.2.22",
     "path": "^0.12.7",
-    "shortid": "^2.2.6"
+    "shortid": "^2.2.6",
+    "debug": "^2.6.0"
   }
 }
