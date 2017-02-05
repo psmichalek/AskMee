@@ -61,8 +61,14 @@ MongoClient.connect(DB_URL, (err,database) => {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname,'public')))
-
 app.set('view engine','ejs')
+
+// Allow cross site so I can run the frontend on another port locally
+app.use(function(req, resp, next) {
+   resp.header("Access-Control-Allow-Origin", "*");
+   resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   next();
+});
 
 /**
  * API routes
