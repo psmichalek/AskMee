@@ -6,6 +6,7 @@ const express       = require('express')
 const bodyParser    = require('body-parser')
 const path          = require('path')
 const shortid       = require('shortid')
+const urlencode     = require('urlencode');
 const MONGO_UN      = (process.env.MICHALEK_APPLES_UN) ? process.env.MICHALEK_APPLES_UN : 'joejoe'
 const MONGO_PW      = (process.env.MICHALEK_APPLES_PW) ? process.env.MICHALEK_APPLES_PW : '12345'
 const HOST_PORT     = (process.env.PORT) ? process.env.PORT : 3007
@@ -76,10 +77,11 @@ app.use(function(req, resp, next) {
 
 app.get('/oauth2/nufiddle/auth', (req,res) => {
     let TT_CLK = process.env.NUFIDDLE_CK;
-    let CBURL  = process.env.NUFIDDLE_CB;
     let STATE = 'nufiddle123xyz';
-    let APIURL = 'https://api.tomtom.com/mysports/oauth2/authorize?Api-Key=askmee123467&client_id='+TT_CLK+'&redirect_uri='+CBURL+'&response_type=code&state='+STATE;
-    res.redirect(APIURL);
+    let APIURL = 'https://api.tomtom.com/mysports/oauth2/authorize?client_id='+TT_CLK+'&response_type=code&state='+STATE+'&scope=';
+    APIURL = APIURL + urlencode('activities heart_rate tracking physiology');
+    res.set('Authorization', process.env.NUFIDDLE_SK);
+    res.redirect( APIURL );
 });
 
 app.get('/oauth2/nufiddle/callback',(req,res) => {
@@ -91,10 +93,11 @@ app.get('/oauth2/nufiddle/callback',(req,res) => {
 
 app.get('/oauth2/nufaddle/auth', (req,res) => {
     let FB_CLK = process.env.NUFADDLE_CK;
-    let CBURL  = process.env.NUFADDLE_CB;
     let STATE = 'nufaddle123xyz';
-    let APIURL = 'https://www.fitbit.com/oauth2/authorize?client_id='+FB_CLK+'&redirect_uri='+CBURL+'&response_type=code&state='+STATE;
-    res.redirect(APIURL);
+    let APIURL = 'https://www.fitbit.com/oauth2/authorize?client_id='+FB_CLK+'&response_type=code&state='+STATE+'&scope=';
+    APIURL = APIURL + urlencode('activity sleep heartrate location nutrition profile settings social weight');
+    res.set('Authorization', process.env.NUFADDLE_SK);
+    res.redirect( APIURL );
 });
 
 app.get('/oauth2/nufaddle/callback',(req,res) => {

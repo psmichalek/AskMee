@@ -36,6 +36,7 @@
     "mongodb": "^2.2.22",
     "path": "^0.12.7",
     "shortid": "^2.2.6",
-    "socket.io": "^1.7.2"
+    "socket.io": "^1.7.2",
+    "urlencode": "^1.1.0"
   }
 }
