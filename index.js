@@ -7,6 +7,7 @@ const bodyParser    = require('body-parser')
 const path          = require('path')
 const shortid       = require('shortid')
 const urlencode     = require('urlencode');
+const cookieParser  = require('cookie-parser');
 const MONGO_UN      = (process.env.MICHALEK_APPLES_UN) ? process.env.MICHALEK_APPLES_UN : 'joejoe'
 const MONGO_PW      = (process.env.MICHALEK_APPLES_PW) ? process.env.MICHALEK_APPLES_PW : '12345'
 const HOST_PORT     = (process.env.PORT) ? process.env.PORT : 3007
@@ -61,6 +62,7 @@ MongoClient.connect(DB_URL, (err,database) => {
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(cookieParser())
 app.use(express.static(path.join(__dirname,'public')))
 app.set('view engine','ejs')
 
@@ -77,7 +79,7 @@ app.use(function(req, resp, next) {
 
 app.get('/oauth2/nufiddle/auth', (req,res) => {
     let TT_CLK = process.env.NUFIDDLE_CK;
-    let STATE = 'nufiddle123xyz';
+    let STATE = 'nufiddle_'+shortid.generate();
     let APIURL = 'https://api.tomtom.com/mysports/oauth2/authorize?client_id='+TT_CLK+'&response_type=code&state='+STATE+'&scope=';
     APIURL = APIURL + urlencode('activities heart_rate tracking physiology');
     res.set('Authorization', process.env.NUFIDDLE_SK);
@@ -86,14 +88,14 @@ app.get('/oauth2/nufiddle/auth', (req,res) => {
 
 app.get('/oauth2/nufiddle/callback',(req,res) => {
     let ret = {};
-    ret.token = (req.params.code) ? req.params.code : null;
-    ret.state = (req.params.state) ? req.params.state : null;
+    ret.token = (req.query.code) ? req.query.code : null;
+    ret.state = (req.query.state) ? req.query.state : null;
     res.json( ret );
 });
 
 app.get('/oauth2/nufaddle/auth', (req,res) => {
     let FB_CLK = process.env.NUFADDLE_CK;
-    let STATE = 'nufaddle123xyz';
+    let STATE = 'nufaddle_'+shortid.generate();
     let APIURL = 'https://www.fitbit.com/oauth2/authorize?client_id='+FB_CLK+'&response_type=code&state='+STATE+'&scope=';
     APIURL = APIURL + urlencode('activity sleep heartrate location nutrition profile settings social weight');
     res.set('Authorization', process.env.NUFADDLE_SK);
@@ -102,8 +104,9 @@ app.get('/oauth2/nufaddle/auth', (req,res) => {
 
 app.get('/oauth2/nufaddle/callback',(req,res) => {
     let ret = {};
-    ret.token = (req.params.code) ? req.params.code : null;
-    ret.state = (req.params.state) ? req.params.state : null;
+    ret.token = (req.query.code) ? req.query.code : null;
+    ret.state = (req.query.state) ? req.query.state : null;
+    res.cookie('name', 'tobi', { signed: true });
     res.json( ret );
 });
 
