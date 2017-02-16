@@ -58,4 +58,17 @@ describe('Loading the Express server ', () => {
         .expect(200, done)
     })
 
+    it('should respond to get /oauth2/nufaddle/auth ', (done) => {
+        request(server)
+        .get('/oauth2/nufiddle/auth')
+        .set('Accept','application/json')
+        .expect(302, done)
+    })
+
+    it('should respond to get /oauth2/nufaddle/callback ', (done) => {
+        request(server)
+        .get('/oauth2/nufiddle/callback')
+        .set('Accept','application/json')
+        .expect(200, done)
+    })
 })
