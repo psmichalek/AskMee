@@ -74,6 +74,18 @@ app.use(function(req, resp, next) {
  * API routes
  */
 
+app.get('/oauth2/nufiddle/auth', (req,res) => {
+    let TT_CLK = process.env.NUFIDDLE_CK;
+    let CBURL   = process.env.NUFIDDLE_CB;
+    let STATE = '123xyz';
+    let APIURL = 'https://api.tomtom.com/mysports/oauth2/authorize?Api-Key=askmee123467&client_id='+OA_CLK+'&redirect_uri='+CBURL+'&response_type=code&state='+STATE;
+    res.redirect(APIURL);
+});
+
+app.get('/oauth2/nufiddle/callback',(req,res) => {
+    res.json( req );
+});
+
 app.get('/api/questions', (req,res) => {
     if(db){
         db.collection(COLLECTION).find().toArray( (err,result) => {
